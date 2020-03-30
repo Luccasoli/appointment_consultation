@@ -1,5 +1,6 @@
 import 'package:appointment_consultation/screens/home.dart';
 import 'package:appointment_consultation/screens/login.dart';
+import 'package:appointment_consultation/screens/signup.dart';
 import 'package:appointment_consultation/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => SplashScreen(),
         'Login': (context) => Login(),
+        'Signup': (context) => Signup(),
         'Home': (context) => Home(),
       },
     );

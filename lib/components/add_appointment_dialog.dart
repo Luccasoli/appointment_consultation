@@ -94,46 +94,53 @@ class _AddAppointmentDialogState extends State<AddAppointmentDialog> {
                 dropdownOptions: timeOptions,
                 hint: 'Hora',
               ),
+              SizedBox(
+                height: 25,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Cancelar',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      if (widget._formKey.currentState.validate()) {
+                        Navigator.pop(context);
+                        widget.onSubmit(
+                          Appointment(
+                            id: Random().nextDouble().toString(),
+                            specialty: specialtyValue,
+                            date: dateValue,
+                            doctor: doctorValue,
+                            time: timeValue,
+                          ),
+                        );
+                      }
+                    },
+                    child: Text(
+                      'Confirmar',
+                      style: Theme.of(context).textTheme.button,
+                    ),
+                    color: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(8.0),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ),
       ),
-      actions: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancelar')),
-            RaisedButton(
-              onPressed: () {
-                if (widget._formKey.currentState.validate()) {
-                  Navigator.pop(context);
-                  widget.onSubmit(
-                    Appointment(
-                      id: Random().nextDouble().toString(),
-                      specialty: specialtyValue,
-                      date: dateValue,
-                      doctor: doctorValue,
-                      time: timeValue,
-                    ),
-                  );
-                }
-              },
-              child: Text(
-                'Confirmar',
-                style: Theme.of(context).textTheme.button,
-              ),
-              color: Theme.of(context).primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(8.0),
-              ),
-            )
-          ],
-        ),
-      ],
     );
   }
 }
