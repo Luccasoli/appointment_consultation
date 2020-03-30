@@ -9,7 +9,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _formKey = GlobalKey<FormState>();
-  List<Appointment> appointments = [];
+  List<Appointment> appointments = [
+    Appointment(
+      id: 1.toString(),
+      specialty: 'd',
+      date: 'f',
+      doctor: 'd',
+      time: 'null',
+    ),
+  ];
 
   _showDialogAddAppointment() {
     showDialog(
@@ -114,60 +122,64 @@ class _HomeState extends State<Home> {
                         child: Text('Você não possui consulta marcada'),
                       ),
                     )
-                  : SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: DataTable(
-                        columns: [
-                          DataColumn(
-                            label: Text('Especialidade'),
-                          ),
-                          DataColumn(
-                            label: Text('Profissional'),
-                          ),
-                          DataColumn(
-                            label: Text('Data'),
-                          ),
-                          DataColumn(
-                            label: Text('Hora'),
-                          ),
-                          DataColumn(
-                            label: Text(''),
-                          ),
-                        ],
-                        rows: appointments.map((appointment) {
-                          return DataRow(
-                            cells: [
-                              DataCell(
-                                Text(appointment.specialty),
+                  : Expanded(
+                      child: SingleChildScrollView(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+                            columns: [
+                              DataColumn(
+                                label: Text('Especialidade'),
                               ),
-                              DataCell(
-                                Text(appointment.doctor),
+                              DataColumn(
+                                label: Text('Profissional'),
                               ),
-                              DataCell(
-                                Text(appointment.date),
+                              DataColumn(
+                                label: Text('Data'),
                               ),
-                              DataCell(
-                                Text(appointment.time),
+                              DataColumn(
+                                label: Text('Hora'),
                               ),
-                              DataCell(
-                                FlatButton(
-                                  onPressed: () {
-                                    _removeAppointment(appointment.id);
-                                  },
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(Icons.clear),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text('Desmarcar'),
-                                    ],
-                                  ),
-                                ),
+                              DataColumn(
+                                label: Text(''),
                               ),
                             ],
-                          );
-                        }).toList(),
+                            rows: appointments.map((appointment) {
+                              return DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text(appointment.specialty),
+                                  ),
+                                  DataCell(
+                                    Text(appointment.doctor),
+                                  ),
+                                  DataCell(
+                                    Text(appointment.date),
+                                  ),
+                                  DataCell(
+                                    Text(appointment.time),
+                                  ),
+                                  DataCell(
+                                    FlatButton(
+                                      onPressed: () {
+                                        _removeAppointment(appointment.id);
+                                      },
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(Icons.clear),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text('Desmarcar'),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ),
+                        ),
                       ),
                     ),
             ],

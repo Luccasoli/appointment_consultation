@@ -8,6 +8,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   bool rememberPasswordValue = false;
+  bool isPasswordInvisible = true;
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +51,20 @@ class _LoginState extends State<Login> {
                         border: OutlineInputBorder(
                           borderSide: BorderSide(),
                         ),
-                        suffix: InkWell(
-                          child: Icon(Icons.remove_red_eye),
-                          onTap: () {},
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            !isPasswordInvisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isPasswordInvisible = !isPasswordInvisible;
+                            });
+                          },
                         ),
                       ),
-                      obscureText: true,
+                      obscureText: isPasswordInvisible,
                     ),
                     InkWell(
                       onTap: () {
